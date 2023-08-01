@@ -5,8 +5,9 @@ These programs (filter-less and filter-more) applies filters to BMPs using the p
 USAGE (linux):
 
 -- filter-more
-$ ./filter -g INFILE.bmp OUTFILE.bmp
+- $ ./filter -g INFILE.bmp OUTFILE.bmp
+- $ ./filter -r INFILE.bmp OUTFILE.bmp
+- $ ./filter -b INFILE.bmp OUTFILE.bmp
+- $ ./filter -e INFILE.bmp OUTFILE.bmp
 
-$ ./filter -r INFILE.bmp OUTFILE.bmp
-$ ./filter -b INFILE.bmp OUTFILE.bmp
-$ ./filter -e INFILE.bmp OUTFILE.bmp
+
