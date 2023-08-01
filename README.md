@@ -6,6 +6,7 @@ USAGE (linux):
 
 -- filter-more
 $ ./filter -g INFILE.bmp OUTFILE.bmp
+
 $ ./filter -r INFILE.bmp OUTFILE.bmp
 $ ./filter -b INFILE.bmp OUTFILE.bmp
 $ ./filter -e INFILE.bmp OUTFILE.bmp
