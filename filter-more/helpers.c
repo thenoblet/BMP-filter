@@ -70,11 +70,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     }
                 }
             }
-            copy[i][j].rgbtRed = round(Red / (float)count);
-            copy[i][j].rgbtBlue = round(Blue / (float)count);
-            copy[i][j].rgbtGreen = round(Green / (float)count);
+            copy[i][j].rgbtRed = round(Red / (float) count);
+            copy[i][j].rgbtBlue = round(Blue / (float) count);
+            copy[i][j].rgbtGreen = round(Green / (float) count);
         }
-
     }
 
     for (int i = 0; i < height; i++)
@@ -86,10 +85,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     }
 }
 
-//implementation of the Sobel Operator to detect edges
+// implementation of the Sobel Operator to detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
-    //make a copy of original image
+    // make a copy of original image
     RGBTRIPLE copy[height][width];
     for (int i = 0; i < height; i++)
     {
@@ -99,19 +98,13 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
         }
     }
 
-    //sobel operator for x direction
-    int Gx[3][3] = {{-1, 0, 1},
-                    {-2, 0, 2},
-                    {-1, 0, 1}
-    };
+    // sobel operator for x direction
+    int Gx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
 
-    //sobel operator for y direction
-    int Gy[3][3] = {{-1, -2, -1},
-                    {0, 0, 0},
-                    {1, 2, 1}
-    };
+    // sobel operator for y direction
+    int Gy[3][3] = {{-1, -2, -1}, {0, 0, 0}, {1, 2, 1}};
 
-    //Iterate through each pixel
+    // Iterate through each pixel
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -120,7 +113,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             int GxRed = 0, GxGreen = 0, GxBlue = 0;
             int GyRed = 0, GyGreen = 0, GyBlue = 0;
 
-            //iterate through 3x3 grid
+            // iterate through 3x3 grid
             for (int row = -1; row <= 1; row++)
             {
                 for (int column = -1; column <= 1; column++)
@@ -128,15 +121,15 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                     int x = i + row;
                     int y = j + column;
 
-                    //check if the current neigbouring pixel is within the bounds of the image
+                    // check if the current neigbouring pixel is within the bounds of the image
                     if (x >= 0 && x < height && y >= 0 && y < width)
                     {
-                        //x direction
+                        // x direction
                         GxRed += image[x][y].rgbtRed * Gx[row + 1][column + 1];
                         GxGreen += image[x][y].rgbtGreen * Gx[row + 1][column + 1];
                         GxBlue += image[x][y].rgbtBlue * Gx[row + 1][column + 1];
 
-                        //y direction
+                        // y direction
                         GyRed += image[x][y].rgbtRed * Gy[row + 1][column + 1];
                         GyGreen += image[x][y].rgbtGreen * Gy[row + 1][column + 1];
                         GyBlue += image[x][y].rgbtBlue * Gy[row + 1][column + 1];
@@ -144,12 +137,12 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 }
             }
 
-            //calculate the new pixel values
+            // calculate the new pixel values
             Red = round(sqrt((GxRed * GxRed) + (GyRed * GyRed)));
             Green = round(sqrt((GxGreen * GxGreen) + (GyGreen * GyGreen)));
             Blue = round(sqrt((GxBlue * GxBlue) + (GyBlue * GyBlue)));
 
-            //Cap values at 255
+            // Cap values at 255
             if (Red > 255)
             {
                 Red = 255;
@@ -163,14 +156,14 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 Blue = 255;
             }
 
-            //assign calculated new pixel values to copied image
+            // assign calculated new pixel values to copied image
             copy[i][j].rgbtRed = Red;
             copy[i][j].rgbtGreen = Green;
             copy[i][j].rgbtBlue = Blue;
         }
     }
 
-    //iterate through pixels to assign copied pixels back to original image
+    // iterate through pixels to assign copied pixels back to original image
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
